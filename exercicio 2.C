@@ -1,29 +1,31 @@
 #include <stdio.h>
-#define tam 15
 
-struct loja {
-  char nomeLoja[15];
-  int telefone;
-  float preco;
-};
+typedef struct Venda {
+char nome[20];
+int tel;
+double preco;
+} Venda;
 
-int main() {
-  struct loja Lojas[tam];
-  int i;
-  float media, soma = 0;
-  for (i = 0; i < tam; i++) {
-    scanf("%s", Lojas[i].nomeLoja);
-    scanf("%d", &Lojas[i].telefone);
-    scanf("%f", &Lojas[i].preco);
+int main(void) {
+  int n = 4;
+  double sum = 0, media = 0;
+  Venda v[n];
+  for (int i = 0; i < n; i++) {
+    printf("\ndigite o nome da loja %d: ", i+1);
+    scanf("%s", v[i].nome);
+    printf("digite o telefone da loja: ");
+    scanf("%d", &v[i].tel);
+    printf("digite o preço de um eletrodoméstico: ");
+    scanf("%lf", &v[i].preco);
+    sum += v[i].preco;
   }
-  for (i = 0; i < tam; i++) {
-    soma = soma + Lojas[i].preco;
-  }
-  media = soma / tam;
-  printf("A média de preços são %f.\n", media);
-  for (i = 0; i < tam; i++) {
-    if (Lojas[i].preco < media)
-      printf("%s - %d\n", Lojas[i].nomeLoja, Lojas[i].telefone);
+  media = sum/n;
+  printf("\na média dos preços é: %.2lf\n", media);
+  printf("\nlojas com preços abaixo da média:\n");
+  for (int i = 0; i < n; i++) {
+    if (v[i].preco < media) {
+      printf("- %s, de telefone %d\n", v[i].nome, v[i].tel);
+    }
   }
   return 0;
 }
